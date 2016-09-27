@@ -18,5 +18,7 @@ public class Blackjack
         // amount of decks to be played with is set by user and sent as argument
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
+        Card dealtCard = playingDeck.dealCard();
+        System.out.println(dealtCard);
     }
 }
