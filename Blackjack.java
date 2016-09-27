@@ -14,7 +14,7 @@ public class Blackjack
         Deck playingDeck = new Deck();
         System.out.print("How many decks would you like to play with?");
         int numDecks = input.nextInt();
-        
+
         // amount of decks to be played with is set by user and sent as argument
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
