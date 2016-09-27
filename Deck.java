@@ -6,6 +6,7 @@ public class Deck
 {
     private List<Card> cards;
     private int numDecks;
+    private Card topCard;
 
     public Deck()
     {
@@ -30,7 +31,6 @@ public class Deck
                 }
             }
         }
-        System.out.println(cards.size());
     }
 
     // shuffles List<Card> cards via Collections.shuffle()
@@ -41,6 +41,16 @@ public class Deck
 
     public Card dealCard()
     {
-        return cards.get(0);
+        System.out.println(cards.size());
+        topCard = cards.get(0);
+        removeCard();
+        return topCard;
+    }
+
+    // removes card from deck
+    public void removeCard()
+    {
+        cards.remove(topCard);
+        System.out.println(cards.size());
     }
 }
