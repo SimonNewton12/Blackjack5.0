@@ -39,18 +39,22 @@ public class Deck
         Collections.shuffle(cards);
     }
 
-    public Card dealCard()
+    public String dealCard(int numCardsToDeal)
     {
-        System.out.println(cards.size());
-        topCard = cards.get(0);
-        removeCard();
-        return topCard;
+        String topCardString = "";
+
+        for (int x = 0; x < numCardsToDeal; x++)
+        {
+            topCard = cards.get(0);
+            removeCard();
+            topCardString += topCard.toString();
+        }
+        return topCardString;
     }
 
     // removes card from deck
     public void removeCard()
     {
-        cards.remove(topCard);
-        System.out.println(cards.size());
+            cards.remove(topCard);
     }
 }
