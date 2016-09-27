@@ -5,6 +5,7 @@ public class Card
     private String suit;
     private int value;
     private String valueStr;
+    private String cardList = "";
 
     /**
      * Card constructor
@@ -27,6 +28,7 @@ public class Card
     @Override
     public String toString()
     {
-        return valueStr + " of " + suit;
+        cardList += valueStr + " of " + suit + "\n";
+        return cardList;
     }
 }
