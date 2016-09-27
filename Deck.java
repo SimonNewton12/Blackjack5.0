@@ -1,25 +1,41 @@
 package osborn.andrew.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Deck
 {
-    List<Card> cards;
+    private List<Card> cards;
+    private int numDecks;
 
     public Deck()
     {
         cards = new ArrayList<>();
     }
 
-    public void fillDeck()
+    /**
+     * createFullDeck(int numDecks) creates a stack of cards with the amount of decks
+     * suggested by the user
+     *
+     * @param numDecks number of decks to use in stack of cards
+     */
+    public void createFullDeck(int numDecks)
     {
-        for (Suit suit : Suit.values())
+        for (int i = 0; i < numDecks; i++)
         {
-            for (Value value : Value.values())
+            for (Suit suit : Suit.values())
             {
-                cards.add(new Card(suit, value));
+                for (Value value : Value.values())
+                {
+                    cards.add(new Card(suit.getSuit(), value.getValue(), value.getValueStr()));
+                }
             }
         }
+        System.out.println(cards.size());
+    }
+
+    // shuffles List<Card> cards via Collections.shuffle()
+    public void shuffle()
+    {
+        Collections.shuffle(cards);
     }
 }

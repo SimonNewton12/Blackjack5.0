@@ -2,27 +2,31 @@ package osborn.andrew.blackjack;
 
 public class Card
 {
-    private Suit suit;
-    private Value value;
+    private String suit;
+    private int value;
+    private String valueStr;
 
-    public Card(Suit suit, Value value)
+    /**
+     * Card constructor
+     * @param suit suit of the card
+     * @param value numerical value of the card
+     * @param valueStr numerical value as a String
+     */
+    public Card(String suit, int value, String valueStr)
     {
         this.suit = suit;
         this.value = value;
+        this.valueStr = valueStr;
     }
 
-    public String toString()
-    {
-        return value + " of " + suit;
-    }
-
-    public Suit getSuit()
-    {
-        return suit;
-    }
-
-    public Value getValue()
+    public int getValue()
     {
         return value;
+    }
+
+    @Override
+    public String toString()
+    {
+        return valueStr + " of " + suit;
     }
 }
