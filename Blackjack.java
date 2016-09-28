@@ -4,13 +4,17 @@ import java.util.Scanner;
 
 public class Blackjack
 {
-    Deck playingDeck;
+    private Database database;
+    private Dealer dealer;
+    private Deck playingDeck;
+    private Scanner input = new Scanner(System.in);
     private static int DEAL = 2;
     private static int HIT = 1;
 
     public Blackjack()
     {
-        Scanner input = new Scanner(System.in);
+        database = new Database();
+        dealer = new Dealer();
 
         System.out.println("Let's play blackjack!");
         playingDeck = new Deck();
@@ -20,6 +24,17 @@ public class Blackjack
         int numDecks = input.nextInt();
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
+
+        createPlayers();
+    }
+
+    public void createPlayers()
+    {
+        System.out.print("Player 1, enter your name: ");
+        String name = input.next();
+        System.out.println();
+        int bankroll = input.nextInt();
+        new Player(name, bankroll);
     }
 
     public void deal()
