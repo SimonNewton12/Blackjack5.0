@@ -14,7 +14,7 @@ public class Deck
 
     /**
      * createFullDeck(int numDecks) creates a stack of cards with the amount of decks
-     * suggested by the user
+     * specified by the user
      *
      * @param numDecks number of decks to use in stack of cards
      */
