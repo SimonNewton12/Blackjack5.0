@@ -22,7 +22,7 @@ public class Database
         players.add(player);
     }
 
-    public List getPlayers()
+    public List<Player> getPlayers()
     {
         return players;
     }
