@@ -21,4 +21,9 @@ public class Database
     {
         players.add(player);
     }
+
+    public List getPlayers()
+    {
+        return players;
+    }
 }
