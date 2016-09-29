@@ -64,8 +64,8 @@ public class Blackjack
         {
             System.out.print(aPlayer.getName() + "'s bet: ");
             int bet = input.nextInt();
-            aPlayer.updateBankroll(bet);
             aPlayer.setBet(bet);
+            aPlayer.updateBankroll();
         }
     }
 
