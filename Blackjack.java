@@ -8,6 +8,8 @@ public class Blackjack
     private Dealer dealer;
     private Deck playingDeck;
     private int numPlayers;
+    private Player player;
+    private Card dealtCard;
     private Scanner input = new Scanner(System.in);
     private static int DEAL = 2;
     private static int HIT = 1;
@@ -29,6 +31,9 @@ public class Blackjack
         int numDecks = input.nextInt();
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
+
+        deal(DEAL);
+        System.out.println(database.getPlayers());
     }
 
     /**
@@ -47,15 +52,21 @@ public class Blackjack
         }
     }
 
-    private void deal()
+    private void deal(int numCards)
     {
-        String dealtCards = playingDeck.dealCard(DEAL);
-        System.out.println(dealtCards);
+        for (int x = 0; x < numPlayers; x++)
+        {
+            for (int y = 0; y < numCards; y++)
+            {
+                dealtCard = playingDeck.dealCard();
+                player = database.getPlayers().get(x);
+                player.addCard(dealtCard);
+            }
+        }
     }
 
     private void hit()
     {
-        String dealtCards = playingDeck.dealCard(HIT);
-        System.out.println(dealtCards);
+        dealtCard = playingDeck.dealCard();
     }
 }
