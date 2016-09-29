@@ -1,5 +1,6 @@
 package osborn.andrew.blackjack;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Blackjack
@@ -26,14 +27,19 @@ public class Blackjack
 
         playingDeck = new Deck();
         System.out.print("How many decks would you like to play with? ");
+        System.out.println("");
 
         // amount of decks to be played with is set by user and sent as argument
         int numDecks = input.nextInt();
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
 
-        deal(DEAL);
-        System.out.println(database.getPlayers());
+        placeBets();
+
+        System.out.println("The dealer is dealing...\n");
+        dealToDealer(DEAL);
+        dealToPlayers(DEAL);
+        revealDealerHand();
     }
 
     /**
@@ -52,17 +58,49 @@ public class Blackjack
         }
     }
 
-    private void deal(int numCards)
+    private void placeBets()
     {
-        for (int x = 0; x < numPlayers; x++)
+        for (Player aPlayer : database.getPlayers())
+        {
+            System.out.print(aPlayer.getName() + "'s bet: ");
+            int bet = input.nextInt();
+            aPlayer.updateBankroll(bet);
+            aPlayer.setBet(bet);
+        }
+    }
+
+    private void dealToDealer(int numCards)
+    {
+        for (int x = 0; x < numCards; x++)
+        {
+            dealtCard = playingDeck.dealCard();
+            dealer.addCard(dealtCard);
+        }
+    }
+
+    private void dealToPlayers(int numCards)
+    {
+        for (Player aPlayer : database.getPlayers())
         {
             for (int y = 0; y < numCards; y++)
             {
                 dealtCard = playingDeck.dealCard();
-                player = database.getPlayers().get(x);
-                player.addCard(dealtCard);
+                aPlayer.addCard(dealtCard);
             }
         }
+    }
+
+    private void revealDealerHand()
+    {
+        String dealerHandString = "";
+        List<Card> hand = dealer.getHand();
+        for (Card aHand : hand)
+        {
+            dealerHandString += aHand.toString();
+        }
+        System.out.println("Dealer's hand:");
+        System.out.println(dealerHandString);
+        System.out.println("");
     }
 
     private void hit()
