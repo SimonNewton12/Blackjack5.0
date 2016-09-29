@@ -1,10 +1,13 @@
 package osborn.andrew.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player
 {
     private String name;
     private int bankroll;
-    private Card cards;
+    private List<Card> hand;
 
     /**
      * Player constructor creates a new player, sets his or her name and bankroll, and adds the player
@@ -17,6 +20,7 @@ public class Player
     {
         setName(name);
         setBankroll(bankroll);
+        hand = new ArrayList<>();
         Database.addPlayer(this);
     }
 
@@ -40,8 +44,13 @@ public class Player
         return name;
     }
 
+    public void addCard(Card card)
+    {
+        hand.add(card);
+    }
+
     public String toString()
     {
-        return name + " - $" + bankroll;
+        return name + " - $" + bankroll + hand;
     }
 }
