@@ -15,6 +15,7 @@ public class Blackjack
     private Scanner input = new Scanner(System.in);
     private static int DEAL = 2;
     private static int HIT = 1;
+    private static boolean isFirstTwoCards = true;
 
     public Blackjack()
     {
@@ -40,8 +41,8 @@ public class Blackjack
         System.out.println("The dealer is dealing...\n");
         dealToDealer(DEAL);
         dealToPlayers(DEAL);
-        revealDealerHand();
-        calculateHandValue(dealer.getHand());
+        revealDealerHand(isFirstTwoCards);
+        calculateHandValue(dealer.getHand(), isFirstTwoCards);
     }
 
     /**
@@ -93,23 +94,38 @@ public class Blackjack
         }
     }
 
-    private void revealDealerHand()
+    private void revealDealerHand(boolean isFirstTwoCards)
     {
         String dealerHandString = "";
         List<Card> hand = dealer.getHand();
-        for (Card aHand : hand)
+
+        if (isFirstTwoCards)
         {
-            dealerHandString += aHand.toString();
+            dealerHandString = hand.get(0).toString() + "SECOND CARD\n";
+        }
+        else
+        {
+            for (Card aHand : hand)
+            {
+                dealerHandString += aHand.toString();
+            }
         }
         System.out.println("Dealer's hand:");
         System.out.print(dealerHandString);
     }
 
-    private void calculateHandValue(List<Card> hand)
+    private void calculateHandValue(List<Card> hand, boolean isFirstTwoCards)
     {
-        for (Card aCard : hand)
+        if (isFirstTwoCards)
         {
-            handValue += aCard.getValue();
+            handValue = hand.get(0).getValue();
+        }
+        else
+        {
+            for (Card aCard : hand)
+            {
+                handValue += aCard.getValue();
+            }
         }
         System.out.println("\tTotal: " + handValue);
     }
