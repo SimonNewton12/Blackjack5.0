@@ -8,6 +8,7 @@ public class Player
     private String name;
     private int bankroll;
     private List<Card> hand;
+    private int bet;
 
     /**
      * Player constructor creates a new player, sets his or her name and bankroll, and adds the player
@@ -47,6 +48,16 @@ public class Player
     public void addCard(Card card)
     {
         hand.add(card);
+    }
+
+    public void setBet(int bet)
+    {
+        this.bet = bet;
+    }
+
+    public void updateBankroll(int bet)
+    {
+        this.bet -= bet;
     }
 
     public String toString()
