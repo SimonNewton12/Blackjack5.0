@@ -39,4 +39,9 @@ public class Player
     {
         return name;
     }
+
+    public String toString()
+    {
+        return name + " - $" + bankroll;
+    }
 }
