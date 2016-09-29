@@ -102,7 +102,7 @@ public class Blackjack
             dealerHandString += aHand.toString();
         }
         System.out.println("Dealer's hand:");
-        System.out.println(dealerHandString);
+        System.out.print(dealerHandString);
     }
 
     private void calculateHandValue(List<Card> hand)
