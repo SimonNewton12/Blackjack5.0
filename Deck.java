@@ -39,26 +39,16 @@ public class Deck
     }
 
     /**
-     * dealCard(int numCardsToDeal) selects the card at the top of the deck, removes it from the deck,
-     * and returns its contents as a string
+     * dealCard() selects the card at the top of the deck, removes it from the deck,
+     * and returns it as a Card object
      *
-     * @param numCardsToDeal deals one or two cards, based on whether the card retrieval is in response to a
-     *                       deal(2 cards) or a hit(1 card)
-     * @return a list of the dealt cards is returned as a string
+     * @return the dealt card
      */
-    public String dealCard(int numCardsToDeal)
+    public Card dealCard()
     {
-        String topCardString = "";
-
-        for (int x = 0; x < numCardsToDeal; x++)
-        {
-            topCard = cards.get(0);
-            removeCard();
-
-            // supports appending card contents when numCardsToDeal > 1
-            topCardString += topCard.toString();
-        }
-        return topCardString;
+        topCard = cards.get(0);
+        removeCard();
+        return topCard;
     }
 
     // removes card from deck
