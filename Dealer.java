@@ -1,16 +1,24 @@
 package osborn.andrew.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dealer
 {
-    private Card cards;
+    private List<Card> hand;
 
-    public void addCards()
+    public Dealer()
     {
-
+        hand = new ArrayList<>();
     }
 
-    public Card getCards()
+    public void addCard(Card card)
     {
-        return cards;
+        hand.add(card);
+    }
+
+    public List<Card> getHand()
+    {
+        return hand;
     }
 }
