@@ -11,6 +11,7 @@ public class Blackjack
     private int numPlayers;
     private Player player;
     private Card dealtCard;
+    private int handValue;
     private Scanner input = new Scanner(System.in);
     private static int DEAL = 2;
     private static int HIT = 1;
@@ -27,10 +28,10 @@ public class Blackjack
 
         playingDeck = new Deck();
         System.out.print("How many decks would you like to play with? ");
-        System.out.println("");
 
         // amount of decks to be played with is set by user and sent as argument
         int numDecks = input.nextInt();
+        System.out.println("");
         playingDeck.createFullDeck(numDecks);
         playingDeck.shuffle();
 
@@ -40,6 +41,7 @@ public class Blackjack
         dealToDealer(DEAL);
         dealToPlayers(DEAL);
         revealDealerHand();
+        calculateHandValue(dealer.getHand());
     }
 
     /**
@@ -67,6 +69,7 @@ public class Blackjack
             aPlayer.setBet(bet);
             aPlayer.updateBankroll();
         }
+        System.out.println("");
     }
 
     private void dealToDealer(int numCards)
@@ -100,7 +103,15 @@ public class Blackjack
         }
         System.out.println("Dealer's hand:");
         System.out.println(dealerHandString);
-        System.out.println("");
+    }
+
+    private void calculateHandValue(List<Card> hand)
+    {
+        for (Card aCard : hand)
+        {
+            handValue += aCard.getValue();
+        }
+        System.out.println("\tTotal: " + handValue);
     }
 
     private void hit()
