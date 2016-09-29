@@ -55,9 +55,14 @@ public class Player
         this.bet = bet;
     }
 
+    /**
+     * updateBankroll(int bet) updates a player's bankroll after placing a bet
+     *
+     * @param bet amount wagered by a player for a given hand
+     */
     public void updateBankroll(int bet)
     {
-        this.bet -= bet;
+        this.bankroll -= bet;
     }
 
     public String toString()
