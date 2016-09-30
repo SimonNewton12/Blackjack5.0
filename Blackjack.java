@@ -65,6 +65,7 @@ public class Blackjack
     {
         for (Player aPlayer : database.getPlayers())
         {
+            System.out.println(aPlayer.getName() + "'s bankroll: $" + aPlayer.getBankroll());
             System.out.print(aPlayer.getName() + "'s bet: ");
             int bet = input.nextInt();
             aPlayer.setBet(bet);
