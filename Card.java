@@ -28,7 +28,7 @@ public class Card
     @Override
     public String toString()
     {
-        cardList += valueStr + " of " + suit + "\n";
+        cardList = valueStr + " of " + suit + "\n";
         return cardList;
     }
 }
