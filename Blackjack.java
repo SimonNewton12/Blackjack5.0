@@ -1,5 +1,7 @@
 package osborn.andrew.blackjack;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,70 +22,74 @@ public class Blackjack
 
     public Blackjack()
     {
-        database = new Database();
-        dealer = new Dealer();
-
-        System.out.println("Let's play blackjack!\n");
-        System.out.print("How many players? ");
-        numPlayers = input.nextInt();
-        createPlayers();
-
-        playingDeck = new Deck();
-        System.out.print("How many decks would you like to play with? ");
-        // amount of decks to be played with is set by user and sent as argument
-        int numDecks = input.nextInt();
-        System.out.println("");
-        playingDeck.createFullDeck(numDecks);
-        playingDeck.shuffle();
-
-        // loops while at least one player is still at the "table"
         while (true)
         {
-            placeBets();
-            dealToDealer(DEAL);
-            System.out.println("The dealer is dealing...\n");
-            dealToPlayers(DEAL);
-            revealUpcard();
-            getUpcardValue();
+            database = new Database();
+            dealer = new Dealer();
 
-            for (Player aPlayer : database.getPlayers())
+            System.out.println("Let's play blackjack!\n");
+            System.out.print("How many players? ");
+            numPlayers = input.nextInt();
+            createPlayers();
+
+            playingDeck = new Deck();
+            System.out.print("How many decks would you like to play with? ");
+            // amount of decks to be played with is set by user and sent as argument
+            int numDecks = input.nextInt();
+            System.out.println("");
+            playingDeck.createFullDeck(numDecks);
+            playingDeck.shuffle();
+
+            // loops while at least one player is still at the "table"
+            while (database.getPlayerListSize() > 0)
             {
+                placeBets();
+                dealToDealer(DEAL);
+                System.out.println("The dealer is dealing...\n");
+                dealToPlayers(DEAL);
+                revealUpcard();
+                getUpcardValue();
+
+                for (Player aPlayer : database.getPlayers()) {
                     revealPlayersHand(aPlayer);
                     calculatePlayerHandValue(aPlayer);
-                    do
-                    {
+                    do {
                         hitOrStand(aPlayer);
                         revealPlayersHand(aPlayer);
                         calculatePlayerHandValue(aPlayer);
-                        if (didPlayerBust(aPlayer))
-                        {
+                        if (didPlayerBust(aPlayer)) {
                             System.out.println(aPlayer.getName() + " busted!\n");
                             break;
                         }
                     }
                     while (aPlayer.getChoseHit());
-            }
-            revealDealerHand();
-            calculateDealerHandValue();
-
-            if (dealer.getHandValue() < 16)
-            {
-                dealToDealer(1);
+                }
                 revealDealerHand();
                 calculateDealerHandValue();
-            }
 
-            for (Player aPlayer : database.getPlayers())
-            {
-                winLossOrStand(aPlayer);
-                aPlayer.clearHand();
-                if (aPlayer.getBankroll() <= 0)
-                {
-                    database.getPlayers().remove(aPlayer);
+                while (dealer.getHandValue() < 16) {
+                    dealToDealer(1);
+                    revealDealerHand();
+                    calculateDealerHandValue();
                 }
-            }
 
-            dealer.clearHand();
+                for (Player aPlayer : database.getPlayers()) {
+                    winLossOrStand(aPlayer);
+                    aPlayer.clearHand();
+                }
+
+                List<Player> toRemove = new ArrayList<>();
+                for (Player aPlayer : database.getPlayers())
+                {
+                    if (aPlayer.getBankroll() <= 0)
+                    {
+                        toRemove.add(aPlayer);
+                    }
+                }
+                database.getPlayers().removeAll(toRemove);
+
+                dealer.clearHand();
+            }
         }
     }
 

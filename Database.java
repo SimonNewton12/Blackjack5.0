@@ -26,4 +26,14 @@ public class Database
     {
         return players;
     }
+
+    public int getPlayerListSize()
+    {
+        return players.size();
+    }
+
+    public void removePlayer(Player aPlayer)
+    {
+
+    }
 }
