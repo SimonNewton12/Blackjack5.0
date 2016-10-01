@@ -71,7 +71,7 @@ public class Blackjack
                 dealToDealer(1);
                 revealDealerHand();
                 calculateDealerHandValue();
-            }gi
+            }
 
             for (Player aPlayer : database.getPlayers())
             {
